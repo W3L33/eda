@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESTRUCTURA DE DATOS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+ <div id="content">
+    <h1>ESTRUCTURA DE DATOS</h1>
+
+    <table id="students-table"></table>
+
+    <script>
+        const table = document.getElementById('students-table');
+        const columns = 5; 
+
+
+        const students = [
+            { name: "Est_1", url: "https://w3l33.github.io", img: "estudiante.jpeg" },
+            { name: "Est_2", url: "https://w3l33.github.io", img: "estudiante.jpeg" },
+            { name: "Est_3", url: "https://w3l33.github.io", img: "estudiante.jpeg" },
+            { name: "Est_4", url: "https://w3l33.github.io", img: "estudiante.jpeg" },
+            { name: "Est_5", url: "https://w3l33.github.io", img: "estudiante.jpeg" }
+
+        ];
+
+        let row;
+        students.forEach((student, index) => {
+
+            if (index % columns === 0) {
+                row = document.createElement('tr');
+                table.appendChild(row);
+            }
+
+            const cell = document.createElement('td');
+
+            // Imagen del estudiante
+            const img = document.createElement('img');
+            img.src = student.img; // foto personalizada
+            img.alt = student.name;
+            img.className = "student-photo";
+
+            // Botón con URL personalizada
+            const btn = document.createElement('a');
+            btn.href = student.url;
+            btn.target = "_blank";
+            btn.className = "student-btn";
+            btn.textContent = student.name; // nombre personalizado
+
+            cell.appendChild(img);
+            cell.appendChild(document.createElement('br'));
+            cell.appendChild(btn);
+
+            row.appendChild(cell);
+        });
+    </script>
+<script src="background.js"></script>
+</div>
+</body>
+ <footer style="margin-top:30px; font-size:14px; color:#555;">
+  By 
+  <a href="https://w3l33.github.io/" 
+     style="color:#0077cc; text-decoration:none; font-weight:bold;">
+     WeLee
+  </a>
+</footer>
+</html>
+
