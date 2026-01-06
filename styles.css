@@ -1,13 +1,16 @@
+/* ========================
+   BODY Y FONDO
+======================== */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* asegura que el body tenga altura completa */
+    min-height: 100vh;
     margin: 0;
     padding: 0;
     background: black;
+    color: #fff;
 }
-
 
 canvas {
     position: fixed;
@@ -18,35 +21,43 @@ canvas {
     z-index: -1; 
 }
 
-h1 {
-    margin-bottom: 50px;
-    color: #fff;
-    text-align: center;
-    text-shadow: 0 0 5px rgba(0,255,255,0.7); 
-font-size: 60px;
+/* ========================
+   CONTENEDOR PRINCIPAL
+======================== */
+#students-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-table {
-    border-collapse: separate;
-    border-spacing: 20px;
-}
-
-td {
-    background-color: rgba(255, 255, 255, 0.15); 
-    backdrop-filter: blur(10px); 
-    -webkit-backdrop-filter: blur(10px); 
+/* ========================
+   TARJETAS ESTUDIANTES
+======================== */
+.student-card {
+    display: flex;           /* nuevo */
+    flex-direction: column;  /* apila foto y botón verticalmente */
+    align-items: center;     /* centra horizontalmente */
+    justify-content: center; /* centra verticalmente dentro de la tarjeta */
+    
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 150px;
-    height: 200px;
-    vertical-align: top;
+    width: 170px;
+    min-width: 120px;
+ min-height: 200px;
     padding: 15px;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-td:hover {
+.student-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 32px rgba(0, 255, 255, 0.4);
 }
@@ -77,16 +88,44 @@ td:hover {
     background-color: rgba(76, 175, 80, 0.9);
     transform: scale(1.05);
 }
-#content {
-    flex: 1; /* ocupa todo el espacio disponible */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+
+/* ========================
+   TITULO
+======================== */
+h1 {
+    margin-bottom: 50px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 0 5px rgba(0,255,255,0.7); 
+    font-size: 60px;
 }
+
+/* ========================
+   FOOTER
+======================== */
 footer {
-    margin-top: auto;
     font-size: 14px;
     color: #555;
     text-align: center;
+    padding: 10px 0;
+    margin-top: auto;
+}
+
+/* ========================
+   MEDIA QUERIES
+======================== */
+@media (max-width: 600px) {
+    h1 { font-size: 36px; }
+    .student-card { width: 90%; padding: 10px; }
+    .student-photo { width: 80px; height: 80px; }
+    .student-btn { padding: 8px 15px; font-size: 14px; }
+}
+
+@media (max-width: 900px) {
+    h1 { font-size: 48px; }
+    .student-card { width: 45%; }
+}
+
+@media (max-width: 1200px) {
+    .student-card { width: 22%; }
 }

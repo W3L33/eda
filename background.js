@@ -1,74 +1,64 @@
-// Crear canvas que ocupe toda la pantalla
 const canvas = document.createElement('canvas');
 document.body.appendChild(canvas);
 const ctx = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+let width = canvas.width = window.innerWidth;
+let height = canvas.height = window.innerHeight;
 
 window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
 });
 
-// Configuración de los puntos
 const points = [];
-const POINTS_COUNT = 100; // cantidad de puntos
-const MAX_DISTANCE = 200; // distancia máxima para dibujar líneas
+const lines = [];
+const pointCount = 100;
 
-// Crear puntos aleatorios
-for (let i = 0; i < POINTS_COUNT; i++) {
+for (let i = 0; i < pointCount; i++) {
     points.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5, // velocidad en x
-        vy: (Math.random() - 0.5) * 0.5, // velocidad en y
-        radius: 1 + Math.random() * 2 // tamaño del punto
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5
     });
 }
 
-// Función para dibujar cada frame
 function animate() {
-    // Fondo negro con leve transparencia para efecto difuminado
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, width, height);
 
-    // Dibujar líneas entre puntos cercanos
+    // dibujar líneas
     for (let i = 0; i < points.length; i++) {
-        const p1 = points[i];
-
-        // Dibujar puntos
-        ctx.beginPath();
-        ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 255, 255, 0.8)'; // color azul neón
-        ctx.fill();
-
         for (let j = i + 1; j < points.length; j++) {
-            const p2 = points[j];
-            const dx = p1.x - p2.x;
-            const dy = p1.y - p2.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-
-            if (dist < MAX_DISTANCE) {
+            const dx = points[i].x - points[j].x;
+            const dy = points[i].y - points[j].y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 150) {
+                ctx.strokeStyle = 'rgba(0,255,255,' + (1 - dist/150) + ')';
+                ctx.lineWidth = 1;
                 ctx.beginPath();
-                ctx.moveTo(p1.x, p1.y);
-                ctx.lineTo(p2.x, p2.y);
-                ctx.strokeStyle = `rgba(0, 255, 255, ${1 - dist / MAX_DISTANCE})`;
-                ctx.lineWidth = 0.5;
+                ctx.moveTo(points[i].x, points[i].y);
+                ctx.lineTo(points[j].x, points[j].y);
                 ctx.stroke();
             }
         }
-
-        // Mover punto
-        p1.x += p1.vx;
-        p1.y += p1.vy;
-
-        // Rebote en los bordes
-        if (p1.x < 0 || p1.x > canvas.width) p1.vx *= -1;
-        if (p1.y < 0 || p1.y > canvas.height) p1.vy *= -1;
     }
+
+    // dibujar puntos
+    points.forEach(p => {
+        ctx.fillStyle = 'rgba(0,255,255,0.7)';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+    });
 
     requestAnimationFrame(animate);
 }
 
 animate();
+
