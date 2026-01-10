@@ -25,8 +25,6 @@ for (let i = 0; i < pointCount; i++) {
 
 function animate() {
     ctx.clearRect(0, 0, width, height);
-
-    // dibujar líneas
     for (let i = 0; i < points.length; i++) {
         for (let j = i + 1; j < points.length; j++) {
             const dx = points[i].x - points[j].x;
@@ -42,8 +40,6 @@ function animate() {
             }
         }
     }
-
-    // dibujar puntos
     points.forEach(p => {
         ctx.fillStyle = 'rgba(0,255,255,0.7)';
         ctx.beginPath();
