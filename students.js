@@ -1,6 +1,6 @@
 const students = [
     { name: "Luis A.", url: "https://luismid28.github.io", img: "estudiante.jpeg" },
-    { name: "Est_2", url: "https://w3l33.github.io", img: "estudiante.jpeg" },
+    { name: "Jose A.", url: "https://kirito8899.github.io", img: "estudiante.jpeg" },
     { name: "Est_3", url: "https://w3l33.github.io", img: "estudiante.jpeg" },
     { name: "Est_4", url: "https://w3l33.github.io", img: "estudiante.jpeg" },
     { name: "Est_5", url: "https://w3l33.github.io", img: "estudiante.jpeg" }
