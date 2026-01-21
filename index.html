@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universidad para el Desarrollo y la Innovación</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="actividades/estilos.css">
+
 </head>
 <body>
 
@@ -22,10 +24,18 @@
 
     <script src="background.js"></script>
     <script src="students.js"></script>
-<iframe src="actividades/index.html"
-        id="widget-flotante"
-        style="position:fixed; top:0; left:0; width:100px; height:100px; border:none; z-index:9999; pointer-events:auto;">
-</iframe>
+<div id="floating-button">ℹ️</div>
+<div id="floating-box">
+  <div id="box-header">
+    <span>Información</span>
+    <button id="close-box">×</button>
+  </div>
+  <div id="box-content">
+    <p>Bienvenido al cuadro flotante. Aquí puedes actualizar información desde tu repositorio.</p>
+  </div>
+</div>
+<script src="actividades/script.js"></script>
+
     
 </body>
 </html>
